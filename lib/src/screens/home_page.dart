@@ -45,6 +45,25 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          Container(
+             decoration: BoxDecoration(color: Colors.grey[900]),
+             child: ListTile(
+              leading: Icon(Icons.access_alarms),
+              title: Text('Ethereum'),
+              subtitle: Text('ETH'),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text('\$454'),
+                  SizedBox(
+                    width: 30.0,
+                  ),
+                  Text('54%', style: TextStyle(color: Colors.green))
+
+                ],
+              ),
+            ),
+          ),
            
           
           
