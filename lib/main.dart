@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Material App',
       theme: ThemeData.dark(),
       home: Scaffold(
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
               ),
               Text('Coins', style: TextStyle(fontSize: 16),),
               SizedBox(
-                height: 20.0,
+                height: 40.0,
               ),
               Text('Exchange', style: TextStyle(fontSize: 16),),
               SizedBox(
