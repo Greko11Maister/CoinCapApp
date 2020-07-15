@@ -1,10 +1,14 @@
+import 'package:coincapapp/src/stores/main_store.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final store = Provider.of<MainStore>(context);
+    store.getData();
     return Container(
 
        child: ListView(
