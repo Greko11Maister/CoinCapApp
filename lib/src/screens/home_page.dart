@@ -25,12 +25,31 @@ class HomePage extends StatelessWidget {
               itemCount: _mainStore.lista.length ?? 0,
               itemBuilder: (_, int index) {
                 final current = _mainStore.lista[index];
+                if (index == 0) {
+                  return Container(
+                    decoration: BoxDecoration(color: Colors.black),
+                    child: ListTile(
+                      title: Text('Name', style: TextStyle(fontSize: 16,),),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text('Price', style: TextStyle(fontSize: 16,),),
+                          SizedBox(
+                            width: 30.0,
+                          ),
+                          Text('(24Hrs)', style: TextStyle(fontSize: 16,),),
+
+                        ],
+                      ),
+                    ),
+                  );
+                }
                 return Container(
                   decoration: BoxDecoration(color: Colors.grey[900]),
                   child: ListTile(
                     leading: Icon(Icons.ac_unit),
                     title: Text("${current.name}"),
-                    subtitle: Text('BTC'),
+                    subtitle: Text('${current.symbol}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
