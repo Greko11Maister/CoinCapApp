@@ -1,16 +1,59 @@
 import 'package:coincapapp/src/stores/main_store.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+
+// import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  final MainStore _mainStore;
+  
+  HomePage(this._mainStore);
 
   @override
   Widget build(BuildContext context) {
-    final store = Provider.of<MainStore>(context);
-    store.getData();
-    return Container(
+    
+    return Observer(
+      builder: (_) {
+        if(!_mainStore.hasResults){
+          return Container(
+            child: Text('Cargando'),
+          );
+        }
+        if (_mainStore.hasResults) {
+          return ListView.builder(
+              itemCount: _mainStore.lista.length ?? 0,
+              itemBuilder: (_, int index) {
+                final current = _mainStore.lista[index];
+                return Container(
+                  decoration: BoxDecoration(color: Colors.grey[900]),
+                  child: ListTile(
+                    leading: Icon(Icons.ac_unit),
+                    title: Text("${current.name}"),
+                    subtitle: Text('BTC'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text('\$87456'),
+                        SizedBox(
+                          width: 30.0,
+                        ),
+                        Text('-5454%', style: TextStyle(color: Colors.red))
 
+                      ],
+                    ),
+                  ),
+                );
+              },
+          );
+
+        } else {
+          return Container();
+        }
+      }
+    );
+    
+    /* Container(
        child: ListView(
          children: <Widget>[
           Container(
@@ -76,6 +119,6 @@ class HomePage extends StatelessWidget {
          ],
        ),
        
-    );
+    ); */
   }
 }

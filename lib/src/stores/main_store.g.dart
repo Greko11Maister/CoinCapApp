@@ -12,7 +12,7 @@ mixin _$MainStore on _MainStore, Store {
   final _$getDataAsyncAction = AsyncAction('_MainStore.getData');
 
   @override
-  Future<void> getData() {
+  Future<dynamic> getData() {
     return _$getDataAsyncAction.run(() => super.getData());
   }
 

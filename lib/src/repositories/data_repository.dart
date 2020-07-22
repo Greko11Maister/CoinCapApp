@@ -1,19 +1,15 @@
+
+
 import 'package:coincapapp/src/api/api_client.dart';
 import 'package:coincapapp/src/models/data_model.dart';
 
 class DataRepository {
-  final ApiClient _apiClient;
+  final ApiClient _apiClient = ApiClient();
 
-  DataRepository(this._apiClient);
-
-  final String api = 'http://api.coincap.io/v2/';
-
-  Future<DataModel> getData() async {
-    final String endpoint = '$api/assets';
+  Future<List<DataModel>> getData() async {
+    final String endpoint = 'https://api.coincap.io/v2/assets';
     final res = await _apiClient.get(endpoint);
-    final data = DataModel.fromJson(res);
-    print(data);
-    return data;
+    return (res['data'] as List).map((e) => DataModel.fromJson(e)).toList();
   }
 
 

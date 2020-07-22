@@ -2,18 +2,19 @@ import 'package:dio/dio.dart';
 
 class ApiClient {
 
-  final _dio;
+  Dio _dio;
 
-  ApiClient(this._dio);
+  ApiClient(){
+    this._dio = Dio();
+  }
 
-  Future <dynamic> get(String url) async {
-    final Response response = await _dio.get(url);
-
+  Future get(String url) async {
+    Response response = await _dio.get(url);
     return response.data;
   }
 
   Future <dynamic> post(String url, data) async {
-    final Response response = await _dio.post(url, data);
+    final Response response = await _dio.post(url, data: data);
 
     return response.data;
   }

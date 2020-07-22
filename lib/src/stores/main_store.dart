@@ -7,15 +7,30 @@ class MainStore = _MainStore with _$MainStore;
 abstract class _MainStore with Store {
   DataRepository _dataRepository;
 
-  _MainStore(DataRepository _dataRepository): this._dataRepository = _dataRepository;
+  _MainStore(){
+    this._dataRepository = DataRepository();
+  }
 
-  ObservableList<Map> dataList = ObservableList.of([]);
+  static ObservableFuture<List<DataModel>> emptyResponse = ObservableFuture.value([]);
+
+  ObservableFuture<List<DataModel>> dataList = emptyResponse;
+
+  List<DataModel> lista = [];
+
+  @computed
+  bool get hasResults => dataList != emptyResponse &&
+      dataList.status == FutureStatus.fulfilled;
 
   @action
-  Future<void> getData() async {
-    final data = await _dataRepository.getData();
-    print(data);
-    // dataList = ObservableList.of(data);
+  Future getData() async {
+    try {
+      lista = [];
+      final future = _dataRepository.getData();
+      dataList = ObservableFuture(future);
+      lista = await dataList;
+      return lista;
+    } catch (e) {
+    }
   }
 
 }
