@@ -27,8 +27,7 @@ abstract class _MainStore with Store {
       lista = [];
       final future = _dataRepository.getData();
       dataList = ObservableFuture(future);
-      lista = await dataList;
-      return lista;
+      return lista = await dataList;
     } catch (e) {
     }
   }

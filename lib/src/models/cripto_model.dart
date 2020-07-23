@@ -1,19 +1,11 @@
-  // To parse this JSON data, do
-//
-//     final dataModel = dataModelFromJson(jsonString);
-
-import 'package:flutter/material.dart';
 import 'dart:convert';
 
+CriptoModel criptoModelFromJson(String str) => CriptoModel.fromJson(json.decode(str));
 
-DataModel dataModelFromJson(String str) => DataModel.fromJson(json.decode(str));
+String criptoModelToJson(CriptoModel data) => json.encode(data.toJson());
 
-String dataModelToJson(DataModel data) => json.encode(data.toJson());
-
-
-
-class DataModel {
-    DataModel({
+class CriptoModel {
+    CriptoModel({
         this.id,
         this.rank,
         this.symbol,
@@ -39,7 +31,7 @@ class DataModel {
     String changePercent24Hr;
     String vwap24Hr;
 
-    factory DataModel.fromJson(Map<String, dynamic> json) => DataModel(
+    factory CriptoModel.fromJson(Map<String, dynamic> json) => CriptoModel(
         id: json["id"],
         rank: json["rank"],
         symbol: json["symbol"],
@@ -66,12 +58,4 @@ class DataModel {
         "changePercent24Hr": changePercent24Hr,
         "vwap24Hr": vwap24Hr,
     };
-
-    get getColor => double.parse(changePercent24Hr) < 0 ? Colors.red : Colors.green;
-
-    get getPrice => double.parse(priceUsd).toStringAsFixed(2);
-
-    get getPorcent => double.parse(changePercent24Hr).toStringAsFixed(2);
-
-    
 }
