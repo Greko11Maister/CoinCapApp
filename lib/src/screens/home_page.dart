@@ -1,3 +1,4 @@
+import 'package:coincapapp/src/screens/cripto_page.dart';
 import 'package:coincapapp/src/screens/list_item_component.dart';
 import 'package:coincapapp/src/stores/main_store.dart';
 import 'package:flutter/material.dart';
@@ -43,14 +44,29 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount: _mainStore.lista.length,
-                  itemBuilder: (_, int index) => ListItemComponent(current: _mainStore.lista[index])
+                  itemBuilder: (_, int index) {
+                    var current = _mainStore.lista[index];
+
+                    return ListItemComponent(
+                      current: current,
+                      onTap: (){
+                        Navigator.push(context, 
+                        MaterialPageRoute(builder: (context) => CriptoPage(id: current.id))
+                        );
+                      }
+                    );
+                  }
                 )
               )
               
             ],
           );
         } else {
-          return Container();
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator()
+            ),
+          );
         }
       }
     );

@@ -1,3 +1,4 @@
+import 'package:coincapapp/src/models/cripto_model.dart';
 import 'package:coincapapp/src/models/data_model.dart';
 import 'package:coincapapp/src/repositories/data_repository.dart';
 import 'package:mobx/mobx.dart';
@@ -15,19 +16,39 @@ abstract class _MainStore with Store {
 
   ObservableFuture<List<DataModel>> dataList = emptyResponse;
 
-  List<DataModel> lista = [];
+  ObservableFuture<CriptoModel> criptoFuture;
 
+  @observable
+  CriptoModel model;
+
+  ObservableList<DataModel> lista = ObservableList.of([]);
+
+
+  /// Computed
   @computed
   bool get hasResults => dataList != emptyResponse &&
       dataList.status == FutureStatus.fulfilled;
 
+  @computed
+  bool get hasResultsModel => criptoFuture.status == FutureStatus.fulfilled;
+
   @action
-  Future getData() async {
+  Future<void> getData() async {
     try {
-      lista = [];
       final future = _dataRepository.getData();
       dataList = ObservableFuture(future);
-      return lista = await dataList;
+      final listaComplete = await dataList;
+      lista = ObservableList.of(listaComplete);
+    } catch (e) {
+    }
+  }
+
+  @action
+  Future<void> getCriptoData(id) async {
+    try {
+      final future = _dataRepository.getCriptoData(id);
+      criptoFuture = ObservableFuture(future);
+      model = await criptoFuture;
     } catch (e) {
     }
   }

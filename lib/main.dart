@@ -11,16 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return Provider(
+      create: (_) => MainStore(),
+      child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       theme: ThemeData.dark(),
-      home: Provider(
-        create: (_) => MainStore(),
-        child: Scaffold(
+      home: Scaffold(
           appBar: AppBar(
             title: Text('Coin App'),
-            
           ),
           drawer: Menu(),
           body: HomePage(),
