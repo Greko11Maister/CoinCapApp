@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 CriptoModel criptoModelFromJson(String str) => CriptoModel.fromJson(json.decode(str));
 
 String criptoModelToJson(CriptoModel data) => json.encode(data.toJson());
@@ -58,4 +60,12 @@ class CriptoModel {
         "changePercent24Hr": changePercent24Hr,
         "vwap24Hr": vwap24Hr,
     };
+
+    get getColor => double.parse(changePercent24Hr) < 0 ? Colors.red : Colors.green;
+
+    get getPrice => double.parse(priceUsd).toStringAsFixed(2);
+
+    get getMaxPrice => double.parse(maxSupply).toStringAsFixed(2);
+
+    get getPorcent => double.parse(changePercent24Hr).toStringAsFixed(2);
 }

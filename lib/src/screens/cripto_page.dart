@@ -20,50 +20,107 @@ class CriptoPage extends StatelessWidget {
       body: Observer(
         builder: (_){
           if (_mainStore.hasResultsModel) {
-            return Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(Icons.account_circle, size: 150.0,),
-                    SizedBox(width: 50.0,),
-                    Column(
+            return SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(Icons.account_circle, size: 150.0,),
+                      SizedBox(width: 50.0,),
+                      Column(
+                        children: <Widget>[
+                          Text('${_mainStore.model.name} (${_mainStore.model.symbol})', style: TextStyle(fontSize: 30.0),),
+                          Text('29 July 2020', style: TextStyle(fontSize: 16.0), ),
+                        ],
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Text('${_mainStore.model.name} (${_mainStore.model.symbol})', style: TextStyle(fontSize: 30.0),),
-                        Text('29 July 2020', style: TextStyle(fontSize: 16.0), ),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text('HIGH')
+                        Container(
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text('HIGH', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey)),
+                              Text('\$${_mainStore.model.getMaxPrice}', style: TextStyle(fontSize: 18))
+                            ],
+                          ),
                         ),
-                        Expanded(
-                          child: Text('\$1561')
+                        Container(
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text('AVERAGE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey)),
+                              Text('\$${_mainStore.model.getPrice}', style: TextStyle(fontSize: 18))
+                            ],
+                          ),
                         ),
+                        
                       ],
                     ),
-                    Row(
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Text('HIGH'),
-                        Text('\$1561')
+                        Container(
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text('LOW', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey)),
+                              Text('\$1561', style: TextStyle(fontSize: 18))
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 200,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text('CHANGE', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey)),
+                              Text('${_mainStore.model.getPorcent}%', style: TextStyle(color: _mainStore.model.getColor))
+                            ],
+                          ),
+                        ),
+                        
                       ],
-                    )
-                  ],
-                )
-              ],
-            );
-          } else {
-            return Container(
-              child: Center(
-                child: CircularProgressIndicator()
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                  Placeholder(fallbackHeight: 350, fallbackWidth: 200,),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: Center(
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(22.0),
+                        ),
+                        color: Color.fromRGBO(24, 198, 131, 1),
+                        onPressed: (){},
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text('More Details', style: TextStyle(fontSize: 16),),
+                        ),
+                      ),
+                    ),
+                  )
+
+                ],
               ),
             );
           }
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator()
+            ),
+          );
         }
       )
       
