@@ -73,5 +73,6 @@ class DataModel {
 
     get getPorcent => double.parse(changePercent24Hr).toStringAsFixed(2);
 
+    get getImage => 'https://static.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png';
     
 }

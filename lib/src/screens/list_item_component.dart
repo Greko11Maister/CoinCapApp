@@ -10,7 +10,7 @@ class ListItemComponent extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(color: Colors.grey[900]),
       child: ListTile(
-        leading: Icon(Icons.ac_unit),
+        leading: Image.network(current.getImage),
         title: Text("${current.name}"),
         subtitle: Text('${current.symbol}'),
         onTap: onTap,

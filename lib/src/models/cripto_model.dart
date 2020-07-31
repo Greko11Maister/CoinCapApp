@@ -68,4 +68,6 @@ class CriptoModel {
     get getMaxPrice => double.parse(maxSupply ?? '0.0').toStringAsFixed(2) ?? '0';
 
     get getPorcent => double.parse(changePercent24Hr).toStringAsFixed(2) ?? '0';
+
+    get getImage => 'https://static.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png';
 }

@@ -26,12 +26,9 @@ class CriptoPage extends StatelessWidget {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Container(
-                          width: 150,
-                          child: Icon(Icons.account_circle, size: 100.0,),
-                        ),
+                      Container(
+                        width: 150,
+                        child: Image.network(_mainStore.model.getImage),
                       ),
                       
                       SizedBox(width: 20.0,),
