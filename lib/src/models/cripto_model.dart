@@ -65,7 +65,7 @@ class CriptoModel {
 
     get getPrice => double.parse(priceUsd).toStringAsFixed(2);
 
-    get getMaxPrice => double.parse(maxSupply).toStringAsFixed(2);
+    get getMaxPrice => double.parse(maxSupply ?? '0.0').toStringAsFixed(2) ?? '0';
 
-    get getPorcent => double.parse(changePercent24Hr).toStringAsFixed(2);
+    get getPorcent => double.parse(changePercent24Hr).toStringAsFixed(2) ?? '0';
 }

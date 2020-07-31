@@ -20,16 +20,24 @@ class CriptoPage extends StatelessWidget {
       body: Observer(
         builder: (_){
           if (_mainStore.hasResultsModel) {
+            print(_mainStore.model.getMaxPrice);
             return SingleChildScrollView(
               child: Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Icon(Icons.account_circle, size: 150.0,),
-                      SizedBox(width: 50.0,),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Container(
+                          width: 150,
+                          child: Icon(Icons.account_circle, size: 100.0,),
+                        ),
+                      ),
+                      
+                      SizedBox(width: 20.0,),
                       Column(
                         children: <Widget>[
-                          Text('${_mainStore.model.name} (${_mainStore.model.symbol})', style: TextStyle(fontSize: 30.0),),
+                          Text('${_mainStore.model.name} (${_mainStore.model.symbol})', style: TextStyle(fontSize: 25.0),),
                           Text('29 July 2020', style: TextStyle(fontSize: 16.0), ),
                         ],
                       )
@@ -115,12 +123,14 @@ class CriptoPage extends StatelessWidget {
                 ],
               ),
             );
+          } else {
+
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator()
+              ),
+            );
           }
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator()
-            ),
-          );
         }
       )
       
